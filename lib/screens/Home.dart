@@ -4,21 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/widgets/custom_pressable_cont.dart';
 import '../widgets/todo_item.dart';
+// use elevated button and textinput to create new note
+//create the function give class as paramather then change status but use setState
+//importantt 24.17 you give paramathers , and functions in widget paramathers , you declare then above the widget constructor
 
 class Home extends StatefulWidget {
   Home({super.key});
- 
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-
- final todoList = Todo.todoList(); // here is important you shoulld import the list from the class 
+  final todoList = Todo
+      .todoList(); // here is important you shoulld import the list from the class
 
   @override
-  Widget build(BuildContext context ) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: _AppBar(),
       backgroundColor: Colors.white,
@@ -27,50 +29,73 @@ class _HomeState extends State<Home> {
         _TextButtons(),
         Expanded(
           child: ListView(
+            padding: EdgeInsets.only(top: 20),
             children: [
-            for (Todo todo in todoList)
-            TodoItem(todo: todo)
-                
-             
-              
+              for (Todo todo in todoList)
+                TodoItem(
+                  todo: todo,
+                  handleTodoChage: _handleTodoChange,
+                  onDeleteIcon: _onDeleteIcon,
+                ) // only point to functions create functions at bottom
             ],
           ),
         )
-
       ]),
     );
   }
 
+  void _handleTodoChange(Todo todo) {
+    // don't forget to take value, it works like other backend languages , not js
+    print('clicked function is worked');
+    setState(() {
+      todo.isComp =
+          !todo.isComp!; // use setState , otherwise you can't update value
+    });
+  }
+
+  void _onDeleteIcon(int id) {
+    print('what is the id $id');
+    setState(() {
+       todoList.removeWhere((val)=>val.id == id);
+    });
+    
+  }
+
   Container _TextButtons() {
     return Container(
+      color: Colors.white,
+      padding: EdgeInsets.all(5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           CustomPressableContainer(),
           GestureDetector(
               onTap: () {
-                print('Task has been clicked');
+                print('Tasks header been clicked');
               },
               child: Container(
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
-                            style: BorderStyle.solid, color: Colors.black,width: 1))),
+                            style: BorderStyle.solid,
+                            color: Colors.black,
+                            width: 1))),
                 padding:
                     EdgeInsets.only(bottom: 0, right: 10, left: 10, top: 20),
-                child: Text('Tasks',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+                child: Text(
+                  'Tasks',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                ),
               )),
         ],
       ),
     );
   }
 
-
- 
-
   Container _TextButtonForTaksIncludeTextfield() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      color: Colors.white,
       child: Column(
         children: [
           TextFieldWriteTodo(),
@@ -79,6 +104,7 @@ class _HomeState extends State<Home> {
             width: 10,
           ),
           TextButton(
+            // add Task button
             // create a button
             style: TextButton.styleFrom(
               padding: EdgeInsets.all(16.0),
@@ -99,15 +125,16 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget TextFieldWriteTodo() { // when you extract the method , you can also say widget widName, or widgtType widName(wihich default)
+  Widget TextFieldWriteTodo() {
+    // when you extract the method , you can also say widget widName, or widgtType widName(wihich default)
     return TextField(
-          decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              hintText: 'write a todo',
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 17)),
-        );
+      decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          hintText: 'write a todo',
+          hintStyle: TextStyle(color: Colors.grey, fontSize: 17)),
+    );
   }
 
   AppBar _AppBar() {

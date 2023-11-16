@@ -18,7 +18,13 @@ class Todo {
       Todo(id: 3, todoText: 'third item', isComp: false),
       Todo(id: 4, todoText: 'fourth item', isComp: true),
       Todo(id: 5, todoText: 'fifth item', isComp: true),
-      Todo(id: 6, todoText: 'sixth item', isComp: false)
+      Todo(id: 6, todoText: 'sixth item', isComp: false),
+       Todo(id: 7, todoText: 'seventh item', isComp: false),
+      Todo(id: 8, todoText: 'eighth item', isComp: true),
+      Todo(id: 9, todoText: 'ninth item', isComp: false),
+      Todo(id: 10, todoText: 'tenth item', isComp: true),
+      Todo(id: 11, todoText: 'eleventh item', isComp: true),
+      Todo(id: 12, todoText: 'twelfth item', isComp: false)
     ];
   }
 }
