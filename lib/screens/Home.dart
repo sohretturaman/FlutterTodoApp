@@ -29,7 +29,9 @@ class _HomeState extends State<Home> {
           child: ListView(
             children: [
             for (Todo todo in todoList)
-             TodoItem(todo: todo)
+            TodoItem(todo: todo)
+                
+             
               
             ],
           ),
