@@ -1,19 +1,24 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/widgets/custom_pressable_cont.dart';
 import '../widgets/todo_item.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
+ 
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+
+ final todoList = Todo.todoList(); // here is important you shoulld import the list from the class 
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context ) {
     return Scaffold(
       appBar: _AppBar(),
       backgroundColor: Colors.white,
@@ -23,8 +28,8 @@ class _HomeState extends State<Home> {
         Expanded(
           child: ListView(
             children: [
-            TodoItem(),
-            TodoItem()
+            for (Todo todo in todoList)
+             TodoItem(todo: todo)
               
             ],
           ),

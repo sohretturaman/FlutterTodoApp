@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-//NOOTE : created a widget folder to give most used components into this folder
-//and the file name starts with lowecase leters but in classes , in statefull,stateless widgets
-//names should start with captal later and it should be camelCase
+import 'package:todo_app/model/todo.dart';
 
 class TodoItem extends StatelessWidget {
-  const TodoItem({super.key});
+
+  final Todo todo; // took cunstructor from model folder under todo file and imported into stateless widget
+  const TodoItem({super.key,required this.todo}); //!! improtant , give that veraibale as a const paramether
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class TodoItem extends StatelessWidget {
         ),
         //subtitle: Text('random'),
         title: Text(
-          'first item title',
+          todo.todoText!,// you must put ! , otherwise it is not gonna work
           style: TextStyle(fontSize: 20,decoration: TextDecoration.lineThrough),
         ),
         trailing: IconButton( //to give the item on the end of listTile//wrap with a container optional
@@ -43,3 +43,8 @@ class TodoItem extends StatelessWidget {
     );
   }
 }
+
+
+//NOOTE : created a widget folder to give most used components into this folder
+//and the file name starts with lowecase leters but in classes , in statefull,stateless widgets
+//names should start with captal later and it should be camelCase
